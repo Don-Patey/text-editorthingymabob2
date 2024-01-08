@@ -1,5 +1,8 @@
+// Purpose: Database functions for the JATE application
 import { openDB } from 'idb';
 
+
+// Initialize the database
 const initdb = async () =>
   openDB('jate', 1, {
     upgrade(db) {
@@ -12,7 +15,7 @@ const initdb = async () =>
     },
   });
 
-
+// Put and get functions for the database
 export const putDb = async (content) => {
   console.log('PUT to the database');
   const jateDb = await openDB('jate', 1);
@@ -23,6 +26,7 @@ export const putDb = async (content) => {
   console.log('Data saved to the database', result.value);
 };
 
+// Get function for the database
 export const getDb = async () => {
   console.log('GET from the database');
   const jateDb = await openDB('jate', 1);
@@ -37,4 +41,5 @@ export const getDb = async () => {
   return result?.value;
 };
 
+// Delete function for the database
 initdb();

@@ -5,6 +5,7 @@ const { CacheableResponsePlugin } = require('workbox-cacheable-response');
 const { ExpirationPlugin } = require('workbox-expiration');
 const { precacheAndRoute } = require('workbox-precaching/precacheAndRoute');
 
+// Precache all assets
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Set up page cache
@@ -20,11 +21,12 @@ const pageCache = new CacheFirst({
   ],
 });
 
+// Warm the page cache
 warmStrategyCache({
   urls: ['/index.html', '/'],
   strategy: pageCache,
 });
-
+// Set up navigation route
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // Set up asset cache
